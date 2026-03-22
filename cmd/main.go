@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log/slog"
 	"os"
 )
 
@@ -12,9 +13,14 @@ func main() {
 	api := application{
 		config: cfg,
 	}
+	//loggger
+
+	logger := slog.New(slog.NewTextHandler(os.Stdout, nil))
+	slog.SetDefault(logger)
 
 	h := api.mount()
 	if err := api.run(h); err != nil {
+		slog.Error("server error", "error", err)
 		os.Exit(1)
 	}
 
