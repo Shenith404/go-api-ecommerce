@@ -1,0 +1,37 @@
+services:
+  postgres:
+    image: postgres:13
+    container_name: pg_go_ecommerce
+    restart: always
+    environment:
+      POSTGRES_USER: admin-user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: go_ecommerce_db
+      # Best practice for production: set the timezone
+      TZ: UTC
+    ports:
+      - "127.0.0.1:5432:5432" # Bind to localhost ONLY for security
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+      - ./init-scripts:/docker-entrypoint-initdb.d # For schema initialization
+    shm_size: "1gb" # Crucial for complex queries/sorting
+    deploy:
+      resources:
+        limits:
+          cpus: "2.0"
+          memory: 4G
+        reservations:
+          cpus: "1.0"
+          memory: 2G
+
+  sqlc:
+    image: sqlc/sqlc:latest
+    container_name: sqlc_go_ecommerce
+    working_dir: /src
+    volumes:
+      - ./:/src
+    command: ["generate", "-f", "sqlc.yaml"]
+
+volumes:
+  pg_data:
+    driver: local

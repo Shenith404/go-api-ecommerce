@@ -1,0 +1,68 @@
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Go binaries and build artifacts
+*.exe
+*.exe~
+*.dll
+*.so
+*.so.*
+*.dylib
+*.test
+*.out
+*.o
+*.a
+
+# Golang dependency management
+go.sum
+vendor/
+go.work
+
+# Build output directories
+/bin/
+/dist/
+/build/
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.iml
+.DS_Store
+Thumbs.db
+
+# Test coverage
+*.cover
+coverage.txt
+cover.out
+*.coverprofile
+
+# Database and local volumes
+pg_data/
+postgres_data/
+*.db
+*.sqlite
+*.sqlite3
+
+# Docker
+docker-compose.override.yml
+.dockerignore
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# OS-specific
+.DS_Store
+Thumbs.db
+.vscode-server/
+.vscode/extensions/
