@@ -19,14 +19,13 @@ func NewHandler(s Service) *handler {
 
 func (h * handler) ListProducts(w http.ResponseWriter, r *http.Request) {
 	//call the service
-	err := h.service.ListProducts(r.Context())
+	products, err := h.service.ListProducts(r.Context())
 	if err != nil {
 		log.Printf("error listing products: %v", err)
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 		return
 	}
 
-	products := []string{"Product 1", "Product 2", "Product 3"}
 
 	json.Write(w,http.StatusOK,products)
 
